@@ -1,38 +1,36 @@
 package com.personal.test;
 import java.util.*;
 public class StackUsingQueue {
-	private int size;
+	int size=0;
 	
-	private Queue<Integer> q1 = new LinkedList<>();
-	private Queue<Integer> q2 = new LinkedList<>();
+	Queue <Integer> mainQueue= new LinkedList<>();
+	
+	public void push(int number) {
+		Queue <Integer> helperQueue= new LinkedList<>();
 
-	
-	public StackUsingQueue(){
-		size=0;
-	}
-	
-	public void push (int x ){
-		q2 = new LinkedList<>();
-		q2.offer(x);
-		size++;
-
-		while (!q1.isEmpty()){
-			q2.offer(q1.remove());
+		while (!mainQueue.isEmpty()) {
+			helperQueue.offer(mainQueue.poll());
 		}
+		mainQueue.offer(number);
 		
-		q1=q2;
-	}
-	public void pop(){
-		if (q1.isEmpty())
-			return ; 
-		q1.remove();
-		size --;
+		while (!helperQueue.isEmpty()) {
+			mainQueue.offer(helperQueue.poll());
+		}	
+		size++;
 	}
 	
-	public int top(){
-		if (q1.isEmpty())
+	
+	public int top() {
+		if (mainQueue.isEmpty())
 			return -1;
-		return q1.peek();
+		return mainQueue.peek();
+	}
+	
+	public int pop() {
+		if (size <=0)
+			return -1;
+		size--;
+		return mainQueue.poll();
 	}
 	
 	public static void main(String args[]){
@@ -52,3 +50,42 @@ public class StackUsingQueue {
 	
 	
 }
+
+
+/**
+
+private int size;
+
+private Queue<Integer> q1 = new LinkedList<>();
+private Queue<Integer> q2 = new LinkedList<>();
+
+
+public StackUsingQueue(){
+	size=0;
+}
+
+public void push (int x ){
+	q2 = new LinkedList<>();
+	q2.offer(x);
+	size++;
+
+	while (!q1.isEmpty()){
+		q2.offer(q1.remove());
+	}
+	
+	q1=q2;
+}
+public void pop(){
+	if (q1.isEmpty())
+		return ; 
+	q1.remove();
+	size --;
+}
+
+public int top(){
+	if (q1.isEmpty())
+		return -1;
+	return q1.peek();
+}
+
+**/
