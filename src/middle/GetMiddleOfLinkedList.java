@@ -15,15 +15,25 @@ public class GetMiddleOfLinkedList {
 	  Node temp6 = new Node(60);
 	  Node temp7 = new Node(70);
 	  Node temp8 = new Node(80);
+	  Node temp9 = new Node(90);
 	 
 	  startNode.setNext(temp2);
 	  temp2.setNext(temp3);
 	  temp3.setNext(temp4);
-	  temp4.setNext(temp5);
-	  temp5.setNext(temp6);
-	  temp6.setNext(temp7);
-	  temp7.setNext(temp8);
-	 
+//	  temp4.setNext(temp5);
+//	  temp5.setNext(temp6);
+//	  temp6.setNext(temp7);
+//	  temp7.setNext(temp8);
+//	  temp8.setNext(temp9);
+	  
+	  Node mover = startNode;
+	  while (mover !=null) {
+		  System.out.print(mover.getData() + " " );
+		  mover= mover.getNext();
+	  }
+	  
+	  System.out.println();
+	  
 	  Node temp = findMiddleNodeOfLinkedList(startNode);
 	  System.out.println(temp.getData());
 	 }
@@ -35,7 +45,7 @@ public class GetMiddleOfLinkedList {
 	 
 	  Node slowPointer = startNode;
 	  Node fastPointer = startNode;
-	  while(fastPointer!=null && fastPointer.getNext()!=null && fastPointer.getNext().getNext()!=null){
+	  while( fastPointer.getNext()!=null && fastPointer.getNext().getNext()!=null){
 	   slowPointer = slowPointer.getNext();
 	   fastPointer = fastPointer.getNext().getNext();
 	 

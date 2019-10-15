@@ -16,22 +16,13 @@ public class KthHighestNumber {
  		HashMap<Character, Integer> sCharacterMap = new HashMap<>();
  		
  		for (char sCharacter : s.toCharArray()) {
- 			Integer sCharacterElement = sCharacterMap.get(sCharacter);
- 			if (sCharacterElement == null ) {
- 				sCharacterMap.put(sCharacter, 1);
- 			} else {
- 				sCharacterMap.put(sCharacter, sCharacterElement + 1);
- 			}
+ 			sCharacterMap.put(sCharacter, sCharacterMap.getOrDefault(sCharacter, 0) +1);
  		}
  		 		
  		HashMap<Character, Integer> tCharacterMap = new HashMap<>();
  		for (char tCharacter : t.toCharArray()) {
- 			Integer tCharacterElement = tCharacterMap.get(tCharacter);
- 			if (tCharacterElement == null ) {
- 				tCharacterMap.put(tCharacter, 1);
- 			} else {
- 				tCharacterMap.put(tCharacter, tCharacterElement + 1);
- 			}
+ 			tCharacterMap.put(tCharacter, tCharacterMap.getOrDefault(tCharacter, 0) + 1);
+
  		}
  		
  		for (char tCharacter : t.toCharArray()) {
@@ -52,30 +43,26 @@ public class KthHighestNumber {
  		
  		
  	}
-	public static int function(int [] arrays, int kthPosition ) {
-		HashMap<Integer, Integer> map = new HashMap<>();
-		
-		for (int element: arrays) {
-			Integer hashElement = map.get(element);
-			if (hashElement == null ) {
-				map.put(element, 1);
-			} else {
-				map.put(element, map.get(element) + 1);
-			}
-		}
-		
-		for (int scan=100; scan >=0; scan --) {
-			Integer hashElement = map.get(scan);
-			if (hashElement != null ) {
-				kthPosition-=hashElement;
-			}
-			if (kthPosition<=0) return scan;
-			
-		}
-		
-		return -1;
-		
-	}
+ 	public static int function(int [] array, int kthElement) {
+ 		HashMap<Integer, Integer> map = new HashMap<>();
+ 		
+ 		for (int element :array) {
+ 			map.put(element, map.getOrDefault(element, 0) + 1);
+ 		}
+ 		
+ 		for (int loop=100; loop>=0; loop --) {
+ 			Integer element = map.get(loop);
+ 			
+ 			if (element!=null) {
+ 				kthElement-=element;
+ 			}
+ 			if (kthElement<=0) return loop;
+ 			
+ 		}
+ 		return -1;
+ 		
+ 	}
+
 	/**
 	 * k = 1 ;  93
 	 * k = 2 ;  88
@@ -94,6 +81,26 @@ public class KthHighestNumber {
 }
 
 /**
+ * 
+ * 	public static int function(int [] arrays, int kthPosition ) {
+		HashMap<Integer, Integer> map = new HashMap<>();
+		
+		for (int element: arrays) {
+			map.put(element, map.getOrDefault(element, 0) + 1);
+		}
+		
+		for (int scan=100; scan >=0; scan --) {
+			Integer hashElement = map.get(scan);
+			if (hashElement != null ) {
+				kthPosition-=hashElement;
+			}
+			if (kthPosition<=0) return scan;
+			
+		}
+		
+		return -1;
+		
+	}
  * 	public static char findTheDifference(String s, String t) {
         char sArray[]=s.toCharArray();
         char tArray[]=t.toCharArray();
