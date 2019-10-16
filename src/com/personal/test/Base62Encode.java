@@ -40,6 +40,7 @@ public class Base62Encode {
 			ret = characters.charAt((int) (b10 % 62)) + ret;
 			b10 /= 62;
 		}
+		int x = (int) 0l;
 		return ret;
 
 	}
@@ -69,7 +70,15 @@ public class Base62Encode {
 		}
 		return ret;
 	}
-
+    public int reverse(int x) {
+        long newValue = 0;
+        while (x!=0){
+            newValue = newValue * 10 + x % 10  ;
+            x = x /10;
+        }
+            
+        return (int)newValue;
+    }
 	// Examples
 	public static void main(String[] args) throws InterruptedException {
 		// Create a Base62 object using the default charset.
@@ -90,11 +99,18 @@ public class Base62Encode {
 				//i *=2;
 			}
 		}
+		
+		System.out.println(base62.reverse(1534236469));
 		// Using invalid characters throws a runtime exception.
 		// Output was out of order with ant, adding this short sleep fixes
 		// things:
 		// The problem seems to be with the way ant's output handles system.err
+		char ch = '0';
+		int i = 10;
+		i = i +Character.getNumericValue(ch);
+		System.out.println(i);
+		Long l = Long.MAX_VALUE;
 
-
+		System.out.println(l.intValue());
 	}
 }
